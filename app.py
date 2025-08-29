@@ -30,23 +30,25 @@ WELCOME_TEXT = (
 @dp.message(Command(commands=["start"]))
 async def cmd_start(message: types.Message):
     kb = types.InlineKeyboardMarkup(inline_keyboard=[
-        [types.InlineKeyboardButton(text="🎮 Play for Giveaway",
-                                   web_app=types.WebAppInfo(url=GAME_URL))]
+        [types.InlineKeyboardButton(
+            text="🎮 Play for Giveaway",
+            web_app=types.WebAppInfo(url=GAME_URL)
+        )]
     ])
     await message.answer(WELCOME_TEXT, reply_markup=kb)
 
+# FastAPI app
 app = FastAPI()
 
 @app.post("/webhook")
 async def telegram_webhook(req: Request):
     data = await req.json()
     update = types.Update(**data)
-    await dp.process_update(update)
+    await dp.feed_update(bot, update)   # ✅ correct for aiogram v3
     return {"ok": True}
 
 @app.on_event("startup")
 async def on_startup():
-    # register webhook: Telegram will POST updates to <WEBHOOK_URL>/webhook
     await bot.set_webhook(f"{WEBHOOK_URL}/webhook")
 
 @app.on_event("shutdown")
