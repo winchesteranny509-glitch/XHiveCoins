@@ -17,7 +17,7 @@ dp = Dispatcher()
 GAME_URL = "https://winchesteranny509-glitch.github.io/HivePuzzleEarn/"
 
 WELCOME_TEXT = (
-    "🎉 Welcome to X Giveaway!\n\n"
+    "🎉 Welcome to XHive Giveaway!\n\n"
     "💎 Turning your time into free tokens!\n"
     "🚀 Earn crypto while you play!\n"
     "💰 Helping you build wealth with free crypto!\n"
